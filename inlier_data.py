@@ -21,6 +21,9 @@ TEST_DATA = pooch.create(
     # are their respective SHA256 hashes. Files will be downloaded
     # automatically when needed (see fetch_gravity_data).
     registry={
+        "pose6dscene.K": "e6102143e171fe20349b50aa4c39ea0f7bb3f7517b6c950c6528a1ee9df5a880",
+        "pose6dscene_gt.txt": "6e0fcc4c1f6f285a94ef525377ca3cb7b5f5add46a909c075a1a7250ba0447de",
+        "pose6dscene_points.txt": "db55eb905928a857608b8f3fd643da0098689824cb448805bb087ef7735314eb",
         "rigid_pose_example_gt.txt": "3bf6f0aee7bc5027ef1168bf1089b2db80ec5c73c4a609ad86662b45836a5f6a",
         "rigid_pose_example_points.txt": "5e3939b84ab2c2cafbdc08aa6ae7bdcfeb5d0f0f28b0b6ec5a9e473bd2d8ac0a",
     },
