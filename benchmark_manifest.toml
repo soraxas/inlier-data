@@ -1,0 +1,19 @@
+version = 1
+
+# Large assets and ground truth belong here. The benchmark runner keeps suite
+# definitions and synthetic generators in inlier-benchmarks.
+
+[[dataset]]
+id = "homography/sacre_coeur"
+files = ["homography_sacre_coeur_a.jpg", "homography_sacre_coeur_b.jpg"]
+ground_truth = "pending: correspondence and homography ground truth"
+
+[[dataset]]
+id = "absolute_pose/pose6dscene"
+files = ["pose6dscene.K", "pose6dscene_gt.txt", "pose6dscene_points.txt"]
+ground_truth = "pose6dscene_gt.txt"
+
+[[dataset]]
+id = "rigid_transform/example"
+files = ["rigid_pose_example_gt.txt", "rigid_pose_example_points.txt"]
+ground_truth = "rigid_pose_example_gt.txt"
