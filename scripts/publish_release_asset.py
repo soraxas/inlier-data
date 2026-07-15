@@ -50,8 +50,16 @@ def main() -> None:
     if not exists:
         command("gh", "release", "create", args.tag, "--title", args.tag, "--notes", args.notes)
 
-    release = json.loads(command("gh", "release", "view", args.tag, "--json", "assets"))
-    asset = next((item for item in release["assets"] if item["name"] == artifact.name), None)
+    repository = command("gh", "repo", "view", "--json", "nameWithOwner", "--jq", ".nameWithOwner").strip()
+
+    def release_assets() -> list[dict[str, str]]:
+        release = json.loads(
+            command("gh", "api", f"repos/{repository}/releases/tags/{args.tag}")
+        )
+        return release["assets"]
+
+    assets = release_assets()
+    asset = next((item for item in assets if item["name"] == artifact.name), None)
     local_sha256 = file_sha256(artifact)
     if asset is not None:
         remote_sha256 = asset.get("digest", "").removeprefix("sha256:")
@@ -61,15 +69,14 @@ def main() -> None:
             )
     else:
         command("gh", "release", "upload", args.tag, str(artifact))
-        release = json.loads(command("gh", "release", "view", args.tag, "--json", "assets"))
-        asset = next((item for item in release["assets"] if item["name"] == artifact.name), None)
+        asset = next((item for item in release_assets() if item["name"] == artifact.name), None)
         if asset is None:
             raise SystemExit(f"Release upload did not produce {artifact.name}")
 
     manifest = json.loads(MANIFEST_PATH.read_text())
     name = args.name or artifact.name
     manifest[name] = {
-        "url": asset["url"],
+        "url": asset["browser_download_url"],
         "sha256": local_sha256,
         "release": args.tag,
     }

@@ -10,3 +10,18 @@ just publish-release RANSAC-Tutorial-Data-ValOnly.tar phototourism-val-v1
 The command rejects unfinished `.aria2` downloads and files larger than 2 GiB,
 uploads to the named release, and records the release URL and SHA256 in
 `release_artifacts.json`.
+
+## PhotoTourism RANSAC fixture
+
+The RANSAC benchmark consumes cached correspondences and ground truth, not the
+source images. Build its image-free fixture from the extracted validation data:
+
+```bash
+just package-phototourism
+just publish-release phototourism-ransac-val-v1.tar.zst phototourism-ransac-val-v1
+```
+
+The archive contains `matches.h5`, `match_conf.h5`, fundamental/essential
+ground truth, calibration, and relative pose for both validation scenes. It
+intentionally excludes JPEGs: image recompression or feature re-extraction
+would make benchmark results incomparable.

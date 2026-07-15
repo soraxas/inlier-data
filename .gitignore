@@ -6,5 +6,12 @@ dist/
 wheels/
 *.egg-info
 
+# Downloaded benchmark sources and generated release archives
+RANSAC-Tutorial-Data-*/
+RANSAC-Tutorial-Data-*.tar
+RANSAC-Tutorial-Data-*.tar.zst
+RANSAC-Tutorial-Data-*.aria2
+phototourism-ransac-val-*.tar.zst
+
 # Virtual environments
 .venv

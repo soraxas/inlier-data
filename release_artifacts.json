@@ -1,1 +1,7 @@
-{}
+{
+  "phototourism-ransac-val-v1.tar.zst": {
+    "release": "phototourism-ransac-val-v1",
+    "sha256": "3f304a482ed6ee0b06a6fca25b2b6e11f850f55a3dc2aec12f932c6a5bcf46d4",
+    "url": "https://github.com/soraxas/inlier-data/releases/download/phototourism-ransac-val-v1/phototourism-ransac-val-v1.tar.zst"
+  }
+}
