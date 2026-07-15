@@ -12,6 +12,7 @@ RANSAC-Tutorial-Data-*.tar
 RANSAC-Tutorial-Data-*.tar.zst
 RANSAC-Tutorial-Data-*.aria2
 phototourism-ransac-val-*.tar.zst
+phototourism-val-images-webp-*.tar.zst
 
 # Virtual environments
 .venv

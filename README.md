@@ -25,3 +25,16 @@ The archive contains `matches.h5`, `match_conf.h5`, fundamental/essential
 ground truth, calibration, and relative pose for both validation scenes. It
 intentionally excludes JPEGs: image recompression or feature re-extraction
 would make benchmark results incomparable.
+
+## PhotoTourism WebP images
+
+For visual inspection only, build and publish a separate lossy WebP archive:
+
+```bash
+just package-phototourism-webp
+just publish-release phototourism-val-images-webp-q85-v1.tar.zst phototourism-val-images-webp-q85-v1
+```
+
+This is deliberately not a benchmark input. Lossless WebP preserves JPEG
+decoded pixels but measured 41.67% larger than the original JPEG sample;
+quality-85 WebP measured 78.35% smaller.

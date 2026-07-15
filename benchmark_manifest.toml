@@ -25,6 +25,12 @@ files = [
 ground_truth = "Fgt.h5"
 
 [[dataset]]
+id = "phototourism-val-images-webp-q85"
+archive = "phototourism-val-images-webp-q85-v1.tar.zst"
+files = ["sacre_coeur/images/*.webp", "st_peters_square/images/*.webp"]
+ground_truth = "not applicable: visual-inspection artifact only"
+
+[[dataset]]
 id = "homography/sacre_coeur"
 files = ["homography_sacre_coeur_a.jpg", "homography_sacre_coeur_b.jpg"]
 ground_truth = "pending: correspondence and homography ground truth"
