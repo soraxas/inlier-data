@@ -10,7 +10,7 @@ import subprocess
 from pathlib import Path
 
 MAX_RELEASE_ASSET_BYTES = 2 * 1024**3
-MANIFEST_PATH = Path(__file__).parents[1] / "release_artifacts.json"
+MANIFEST_PATH = Path(__file__).parents[1] / "inlier_data" / "release_artifacts.json"
 
 
 def command(*args: str) -> str:

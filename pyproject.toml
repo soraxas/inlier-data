@@ -8,6 +8,8 @@ dependencies = [
     "pooch>=1.6.0",
 ]
 
-[tool.setuptools]
-py-modules = ['inlier_data']
+[tool.setuptools.packages.find]
+include = ["inlier_data"]
 
+[tool.setuptools.package-data]
+inlier_data = ["release_artifacts.json"]

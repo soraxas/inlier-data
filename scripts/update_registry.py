@@ -8,7 +8,7 @@ from typing import Dict
 
 
 ROOT = Path(__file__).resolve().parent.parent
-REGISTRY_FILE = ROOT / "inlier_data.py"
+REGISTRY_FILE = ROOT / "inlier_data" / "__init__.py"
 TESTDATA_DIR = ROOT / "testdata"
 
 
@@ -25,7 +25,7 @@ def _load_registry(source: str) -> Dict[str, str]:
     )
 
     if registry_node is None:
-        raise RuntimeError("Could not find REPO_REGISTRY in inlier_data.py")
+        raise RuntimeError("Could not find REPO_REGISTRY in inlier_data/__init__.py")
 
     return ast.literal_eval(registry_node)
 
