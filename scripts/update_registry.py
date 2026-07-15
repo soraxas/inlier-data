@@ -19,13 +19,13 @@ def _load_registry(source: str) -> Dict[str, str]:
             node.value
             for node in tree.body
             if isinstance(node, ast.Assign)
-            and any(isinstance(target, ast.Name) and target.id == "STATIC_REGISTRY" for target in node.targets)
+            and any(isinstance(target, ast.Name) and target.id == "REPO_REGISTRY" for target in node.targets)
         ),
         None,
     )
 
     if registry_node is None:
-        raise RuntimeError("Could not find STATIC_REGISTRY in inlier_data.py")
+        raise RuntimeError("Could not find REPO_REGISTRY in inlier_data.py")
 
     return ast.literal_eval(registry_node)
 
@@ -35,11 +35,11 @@ def _render_registry_block(registry: Dict[str, str], indent: str) -> str:
     lines = [
         f'{entry_indent}"{name}": "{sha}",' for name, sha in sorted(registry.items())
     ]
-    return "\n".join([f"{indent}STATIC_REGISTRY = {{"] + lines + [f"{indent}}}"])
+    return "\n".join([f"{indent}REPO_REGISTRY = {{"] + lines + [f"{indent}}}"])
 
 
 def _replace_registry_block(source: str, registry: Dict[str, str]) -> str:
-    pattern = re.compile(r"(?ms)^(?P<indent>\s*)STATIC_REGISTRY\s*=\s*\{.*?^\s*\}")
+    pattern = re.compile(r"(?ms)^(?P<indent>\s*)REPO_REGISTRY\s*=\s*\{.*?^\s*\}")
     match = pattern.search(source)
     if not match:
         raise RuntimeError("Could not locate registry block for replacement")
