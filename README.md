@@ -38,3 +38,18 @@ just publish-release phototourism-val-images-webp-q85-v1.tar.zst phototourism-va
 This is deliberately not a benchmark input. Lossless WebP preserves JPEG
 decoded pixels but measured 41.67% larger than the original JPEG sample;
 quality-85 WebP measured 78.35% smaller.
+
+## Homography RANSAC fixture
+
+Build the image-free HPatchesSeq and EVD validation fixture directly from the
+RANSAC tutorial archive:
+
+```bash
+just package-homography /path/to/homography.tar.gz
+just publish-release homography-ransac-val-v1.tar.zst homography-ransac-val-v1
+```
+
+It contains only cached correspondence, confidence, and ground-truth
+homography HDF5 files. The PPM images and test split are intentionally
+excluded because estimating an `inlier` model needs no image decoding or
+feature extraction.

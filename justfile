@@ -12,3 +12,6 @@ package-phototourism source="RANSAC-Tutorial-Data-ValOnly" output="phototourism-
 
 package-phototourism-webp source="RANSAC-Tutorial-Data-ValOnly" output="phototourism-val-images-webp-q85-v1.tar.zst":
   uv run scripts/package_phototourism_webp_images.py "{{source}}" --output "{{output}}"
+
+package-homography source="homography.tar.gz" output="homography-ransac-val-v1.tar.zst":
+  uv run scripts/package_homography_ransac.py "{{source}}" --output "{{output}}"

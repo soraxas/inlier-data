@@ -59,6 +59,28 @@ preserves decoded RGB pixels but measured 41.67% larger than the JPEG sample;
 quality-85 WebP measured 78.35% smaller. Do not use either recompressed image
 set as a canonical feature-extraction input.
 
+## Homography Fixtures
+
+Build the image-free validation fixture from the RANSAC tutorial's
+`homography.tar.gz` archive:
+
+```bash
+just package-homography /path/to/homography.tar.gz
+just publish-release homography-ransac-val-v1.tar.zst homography-ransac-val-v1
+```
+
+The fixture deliberately retains only `HPatchesSeq` and `EVD` validation
+`matches.h5`, `match_conf.h5`, and `Hgt.h5` files. The archive's PPM images
+and test split are not required to evaluate an estimator from its precomputed
+correspondences and ground-truth homographies. Keep this layout stable for
+benchmark consumers:
+
+```text
+homography-ransac-val/
+  HPatchesSeq/val/{matches.h5,match_conf.h5,Hgt.h5}
+  EVD/val/{matches.h5,match_conf.h5,Hgt.h5}
+```
+
 ## Python Distribution
 
 `inlier_data` is a package because `release_artifacts.json` must be installed

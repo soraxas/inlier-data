@@ -1,4 +1,9 @@
 {
+  "homography-ransac-val-v1.tar.zst": {
+    "release": "homography-ransac-val-v1",
+    "sha256": "9ac385d6b814d112167c3b4399e757b03cd3e9aaed4606eae3856c67d9f5bb17",
+    "url": "https://github.com/soraxas/inlier-data/releases/download/homography-ransac-val-v1/homography-ransac-val-v1.tar.zst"
+  },
   "phototourism-ransac-val-v1.tar.zst": {
     "release": "phototourism-ransac-val-v1",
     "sha256": "3f304a482ed6ee0b06a6fca25b2b6e11f850f55a3dc2aec12f932c6a5bcf46d4",
