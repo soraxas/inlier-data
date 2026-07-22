@@ -1,4 +1,9 @@
 {
+  "epos-pnp-ransac-val-v1.tar.zst": {
+    "release": "epos-pnp-ransac-val-v1",
+    "sha256": "dc73de2aea338a042664df7128dbde7d37de303b26f5e72b67cc8d77306e7655",
+    "url": "https://github.com/soraxas/inlier-data/releases/download/epos-pnp-ransac-val-v1/epos-pnp-ransac-val-v1.tar.zst"
+  },
   "homography-ransac-val-v1.tar.zst": {
     "release": "homography-ransac-val-v1",
     "sha256": "9ac385d6b814d112167c3b4399e757b03cd3e9aaed4606eae3856c67d9f5bb17",
