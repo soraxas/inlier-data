@@ -69,6 +69,18 @@ just package-homography /path/to/homography.tar.gz
 just publish-release homography-ransac-val-v1.tar.zst homography-ransac-val-v1
 ```
 
+### EPOS absolute-pose correspondences
+
+The RANSAC Tutorial PnP archive contains image-free EPOS 2D--3D correspondence
+files. Package the complete `epos_corr_lmo` tree (currently 609 cases), rather
+than a hand-picked subset: benchmark runners choose their deterministic sample
+from this canonical archive.
+
+```bash
+just package-epos-pnp /path/to/extracted/RANSAC-Tutorial-Data-PnP
+just publish-release epos-pnp-ransac-val-v1.tar.zst epos-pnp-ransac-val-v1
+```
+
 The fixture deliberately retains only `HPatchesSeq` and `EVD` validation
 `matches.h5`, `match_conf.h5`, and `Hgt.h5` files. The archive's PPM images
 and test split are not required to evaluate an estimator from its precomputed

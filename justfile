@@ -15,3 +15,6 @@ package-phototourism-webp source="RANSAC-Tutorial-Data-ValOnly" output="phototou
 
 package-homography source="homography.tar.gz" output="homography-ransac-val-v1.tar.zst":
   uv run scripts/package_homography_ransac.py "{{source}}" --output "{{output}}"
+
+package-epos-pnp source="RANSAC-Tutorial-Data-PnP" output="epos-pnp-ransac-val-v1.tar.zst":
+  uv run scripts/package_epos_pnp_ransac.py "{{source}}" --output "{{output}}"

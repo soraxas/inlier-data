@@ -49,6 +49,20 @@ just package-homography /path/to/homography.tar.gz
 just publish-release homography-ransac-val-v1.tar.zst homography-ransac-val-v1
 ```
 
+## EPOS PnP validation fixture
+
+The EPOS 2D--3D correspondence files from the RANSAC Tutorial PnP archive are
+small enough to ship in full and do not require images. Build and publish the
+canonical archive from the extracted source tree:
+
+```bash
+just package-epos-pnp /path/to/extracted/RANSAC-Tutorial-Data-PnP
+just publish-release epos-pnp-ransac-val-v1.tar.zst epos-pnp-ransac-val-v1
+```
+
+The archive contains the complete `epos_corr_lmo` set; benchmark code selects a
+deterministic, stratified subset for each CI scope.
+
 It contains only cached correspondence, confidence, and ground-truth
 homography HDF5 files. The PPM images and test split are intentionally
 excluded because estimating an `inlier` model needs no image decoding or
