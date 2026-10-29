@@ -189,7 +189,7 @@ async function loadLive() {
     if (batch.length < 100) break;
   }
   const [registry, gaussian] = await Promise.all([raw(CONFIG.sources.registry), raw(CONFIG.sources.gaussian)].map(getJSON));
-  return { registry, gaussian, releases, live: true };
+  return { registry, gaussian, releases };
 }
 
 function analyse({ registry, gaussian, releases }) {
@@ -228,9 +228,15 @@ function analyse({ registry, gaussian, releases }) {
 
 function render(data, checkedAt) {
   const { rows, orphans } = analyse(data);
-  $("source").textContent = data.live ? "live" : "snapshot";
-  $("source").className = `source ${data.live ? "ok" : "warn"}`;
-  $("source").title = data.live ? "" : `GitHub unavailable (${data.error}); showing data from ${CONFIG.builtAt}`;
+  const badge = {
+    live: ["live", "ok", ""],
+    cached: [`cached ${Math.max(1, Math.round((Date.now() - checkedAt) / 60000))} min ago`, "info",
+      "Saved result from this browser; press Refresh to fetch from GitHub now"],
+    snapshot: ["snapshot", "warn", `GitHub unavailable (${data.error}); showing data from ${CONFIG.builtAt}`],
+  }[data.mode];
+  $("source").textContent = badge[0];
+  $("source").className = `source ${badge[1]}`;
+  $("source").title = badge[2];
   $("checked").textContent = `checked ${checkedAt.toLocaleString()}`;
 
   const problems = rows.filter((row) => row.problems.length).length + orphans.length;
@@ -292,24 +298,49 @@ function render(data, checkedAt) {
         textContent: data.releases ? "Every release asset is registered." : "Not checked: GitHub unavailable." }))]));
 }
 
-let current = null;
-async function refresh() {
-  $("refresh").disabled = true;
+// Reuse a recent live result so reopening the page does not spend GitHub's
+// 60 requests/hour unauthenticated limit; Refresh always fetches.
+const CACHE_KEY = `inlier-data-dashboard:${CONFIG.repository}`;
+const CACHE_MS = 10 * 60 * 1000;
+function readCache() {
   try {
-    current = await loadLive();
-  } catch (error) {
-    current = { ...SNAPSHOT, releases: null, live: false, error: error.message };
-  }
-  $("refresh").disabled = false;
-  render(current, new Date());
+    const cached = JSON.parse(localStorage.getItem(CACHE_KEY));
+    return cached?.data?.releases && cached.at ? cached : null;
+  } catch { return null; }
 }
+function writeCache(data, at) {
+  try { localStorage.setItem(CACHE_KEY, JSON.stringify({ at, data })); } catch {}
+}
+
+let current = null;
+async function refresh(force) {
+  const cached = readCache();
+  if (!force && cached && Date.now() - cached.at < CACHE_MS) {
+    current = { data: { ...cached.data, mode: "cached" }, at: cached.at };
+  } else {
+    $("refresh").disabled = true;
+    try {
+      const data = await loadLive();
+      const at = Date.now();
+      writeCache(data, at);
+      current = { data: { ...data, mode: "live" }, at };
+    } catch (error) {
+      current = cached
+        ? { data: { ...cached.data, mode: "cached" }, at: cached.at }
+        : { data: { ...SNAPSHOT, releases: null, mode: "snapshot", error: error.message }, at: Date.now() };
+    }
+    $("refresh").disabled = false;
+  }
+  rerender();
+}
+const rerender = () => current && render(current.data, new Date(current.at));
 
 $("repo-link").href = `https://github.com/${CONFIG.repository}`;
 $("repo-link").textContent = CONFIG.repository;
-$("filter").addEventListener("input", () => current && render(current, new Date()));
-$("status").addEventListener("change", () => current && render(current, new Date()));
-$("refresh").addEventListener("click", refresh);
-refresh();
+$("filter").addEventListener("input", rerender);
+$("status").addEventListener("change", rerender);
+$("refresh").addEventListener("click", () => refresh(true));
+refresh(false);
 </script>
 </body>
 </html>
