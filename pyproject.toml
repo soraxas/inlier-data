@@ -12,7 +12,7 @@ dependencies = [
 include = ["inlier_data"]
 
 [tool.setuptools.package-data]
-inlier_data = ["release_artifacts.json"]
+inlier_data = ["release_artifacts.json", "gaussian_splats.json"]
 
 [tool.ruff.lint]
 # Pin the rule set here so local global ruff configs do not change results.

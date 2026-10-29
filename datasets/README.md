@@ -7,7 +7,7 @@ applicable attribution and license text in any subsequently published archive.
 
 ## Gaussian splat candidates
 
-[gaussian-splats-v1.json](gaussian-splats-v1.json) records pinned upstream
+[gaussian_splats.json](../inlier_data/gaussian_splats.json) records pinned upstream
 revisions, original-byte SHA-256 hashes, sizes and license evidence for three
 candidate fixtures. It includes all 57 referenced files in the Playbot hierarchy,
 not only its root manifest. It contains metadata only, with no model binaries.
@@ -42,6 +42,10 @@ entry. Primary permission references:
 
 ## Promotion to benchmark inputs
 
+Explicit offline fixture preparation is available now; network acquisition and
+release publication remain separate from local integrity verification. Preparation
+does not establish permission for a particular use or redistribution.
+
 1. Resolve the dataset's applicable license and exact-version attribution. Store
    its license identifier, full text or authoritative link, evidence, and any
    required notices. Permission to redistribute and suitability for the intended
@@ -60,5 +64,38 @@ entry. Primary permission references:
    render settings and dataset version in the benchmark consumer.
 
 Consumer repositories should reference this catalog's revision and dataset ID,
-not duplicate license decisions or copy models into Git. The catalog is currently
-repository documentation and is not distributed as installed package data.
+not duplicate license decisions or copy models into Git. The catalog and offline
+preparation module are installed package data; original model files are not.
+
+## Prepare the local fixtures
+
+From this repository, seed the cache with existing files or a complete hierarchy:
+
+```sh
+just gaussian prepare apartment-v1 --source /path/to/apartment.sog
+just gaussian prepare junkshop-sh3-v1 --source /path/to/JunkShop-SH3.sog
+just gaussian prepare playbot-lod-v1 --source /path/to/playbot
+just gaussian verify playbot-lod-v1
+just test-gaussian
+```
+
+Without Just, use `uv run python -m inlier_data.gaussian` with the same arguments.
+`--cache-root /path/to/cache` or `INLIER_DATA_DIR` overrides the OS cache base.
+Each fixture lives under `gaussian/<catalog-version>/<dataset-id>/<input-hash>/`.
+Changing any inventoried bytes creates a different identity and directory.
+Repeated prepare/verify calls recheck every file and reuse a complete valid
+cache without requiring the original source. Corrupt caches fail explicitly;
+use a fresh cache base or remove the affected fixture directory before reseeding.
+
+The command emits one JSON report on success and a nonzero exit on failure.
+`fixture.json` is published only after complete validation and an atomic cache
+directory rename. It records `entrypoint`, `root`, all file hashes, the catalog
+hash, complete asset-set identity and unresolved license evidence. Bundle checks
+cover ZIP CRC, metadata and referenced textures; hierarchy checks cover every
+inventoried resource and leaf-range bounds. These are structural checks, not
+production decoding, rendered correctness or measured performance.
+
+Pass `entrypoint` to a native SOG runner or file-picker browser replay. For LOD,
+serve `root` on localhost and load `entrypoint_relative` as the hierarchy URL;
+use `asset_identity` as the whole-hierarchy identity. Preparing files belongs
+outside the timed window. Keep captures and traces outside this repository.

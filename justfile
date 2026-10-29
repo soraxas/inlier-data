@@ -24,3 +24,11 @@ check:
 
 check-releases:
   uv run --no-project python scripts/check_release_assets.py
+
+# Offline preparation from a local SOG file or complete hierarchy directory.
+[positional-arguments]
+gaussian *args:
+  uv run python -m inlier_data.gaussian "$@"
+
+test-gaussian:
+  uv run python -m unittest discover -s tests -p 'test_gaussian.py' -v

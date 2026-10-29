@@ -110,6 +110,12 @@ unzip -l /tmp/inlier-data-wheel/*.whl
 
 The wheel must include both `inlier_data/__init__.py` and
 `inlier_data/release_artifacts.json`.
+Gaussian fixture preparation additionally ships `inlier_data/gaussian.py` and
+`inlier_data/gaussian_splats.json`; the installed wheel must load that catalog.
+Models remain outside Git and package distributions. Candidate fixtures may be
+prepared offline from explicit local inputs; that verifies integrity, not asset
+permissions. Keep unresolved license evidence and disabled automatic acquisition
+in the catalog. See [dataset provenance](datasets/README.md).
 
 ## Commit Checks
 

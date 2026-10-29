@@ -10,11 +10,19 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-REQUIRED_FILES = {"inlier_data/__init__.py", "inlier_data/release_artifacts.json"}
+REQUIRED_FILES = {
+    "inlier_data/__init__.py",
+    "inlier_data/release_artifacts.json",
+    "inlier_data/gaussian.py",
+    "inlier_data/gaussian_splats.json",
+}
 IMPORT_CHECK = (
     "import inlier_data; "
     "assert inlier_data.RELEASE_ARTIFACTS, 'release_artifacts.json is empty'; "
-    "assert set(inlier_data.URLS) <= set(inlier_data.REGISTRY)"
+    "assert set(inlier_data.URLS) <= set(inlier_data.REGISTRY); "
+    "from inlier_data.gaussian import CATALOG; "
+    "import json; "
+    "assert len(json.loads(CATALOG.read_text())['datasets']) == 3"
 )
 
 

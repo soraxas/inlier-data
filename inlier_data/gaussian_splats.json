@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "catalog_version": "gaussian-splats-v1",
-  "purpose": "Candidate Gaussian rendering, loading and LOD fixtures; not an enabled Pooch or release registry.",
+  "purpose": "Pinned Gaussian fixture inputs for explicit offline preparation; automatic fetching and release publication remain disabled.",
   "datasets": {
     "apartment-v1": {
       "title": "Apartment (PlayCanvas example)",
