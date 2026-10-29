@@ -61,7 +61,8 @@ main { max-width: 1180px; margin: 0 auto; padding: 32px 16px 48px; }
 header { display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline;
   justify-content: space-between; margin-bottom: 20px; }
 h1 { font-size: 22px; margin: 0; letter-spacing: -0.01em; }
-h2 { font-size: 15px; margin: 28px 0 10px; }
+h2 { font-size: 15px; margin: 28px 0 4px; }
+h2 + .meta { margin: 0 0 10px; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 .meta { color: var(--muted); font-size: 13px; }
@@ -136,7 +137,8 @@ code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
     </table>
   </div>
 
-  <h2>Release assets not in the registry</h2>
+  <h2>Published but not registered</h2>
+  <p class="meta">Uploaded to a GitHub release, but missing from <code>release_artifacts.json</code> on the default branch, so <code>inlier_data</code> cannot fetch them. Register them by committing the publisher's registry update.</p>
   <div class="table-wrap">
     <table>
       <thead><tr><th>Asset</th><th>Release</th><th>Published</th><th class="num">Size</th></tr></thead>
