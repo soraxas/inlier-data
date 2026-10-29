@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 REGISTRY_FILE = ROOT / "inlier_data" / "__init__.py"
 RELEASE_FILE = ROOT / "inlier_data" / "release_artifacts.json"
 TESTDATA_DIR = ROOT / "testdata"
+GAUSSIAN_CATALOG = ROOT / "inlier_data" / "gaussian_splats.json"
 RELEASE_URL = (
     "https://github.com/soraxas/inlier-data/releases/download/{release}/{name}"
 )
@@ -79,6 +80,31 @@ def _check_release_registry(errors: list[str], repo_names: set[str]) -> None:
     if not isinstance(artifacts, dict):
         errors.append(f"{RELEASE_FILE.name}: top level must be an object")
         return
+    # The publisher writes this exact form; anything else is a hand edit.
+    if (
+        RELEASE_FILE.read_text()
+        != json.dumps(artifacts, indent=2, sort_keys=True) + "\n"
+    ):
+        errors.append(
+            f"{RELEASE_FILE.name} is not in the publisher's sorted, 2-space form"
+        )
+
+    from package_release import PACKAGES
+
+    for name in artifacts:
+        if name.removesuffix(".tar.zst") not in PACKAGES:
+            errors.append(
+                f"{name} has no PACKAGES entry in scripts/package_release.py, "
+                "so it cannot be rebuilt"
+            )
+    catalog = json.loads(GAUSSIAN_CATALOG.read_text())
+    for dataset_id, dataset in catalog["datasets"].items():
+        artifact = dataset.get("release_artifact")
+        if artifact is not None and artifact not in artifacts:
+            errors.append(
+                f"{GAUSSIAN_CATALOG.name}[{dataset_id!r}].release_artifact "
+                f"{artifact} is not registered"
+            )
 
     for name, artifact in artifacts.items():
         where = f"{RELEASE_FILE.name}[{name!r}]"

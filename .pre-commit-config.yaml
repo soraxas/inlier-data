@@ -36,7 +36,7 @@ repos:
         name: check Pooch registries match testdata and releases
         language: system
         entry: uv run --quiet --no-project python scripts/check_registry.py
-        files: ^(testdata/|inlier_data/|scripts/check_registry\.py$)
+        files: ^(testdata/|inlier_data/|scripts/(check_registry|package_release)\.py$)
         pass_filenames: false
 
       - id: uv-lock
