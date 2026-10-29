@@ -1,0 +1,477 @@
+{
+  "schema_version": 1,
+  "catalog_version": "gaussian-splats-v1",
+  "purpose": "Candidate Gaussian rendering, loading and LOD fixtures; not an enabled Pooch or release registry.",
+  "datasets": {
+    "apartment-v1": {
+      "title": "Apartment (PlayCanvas example)",
+      "format": "sog-v2-bundle",
+      "splat_count": 661466,
+      "source": {
+        "repository": "https://github.com/playcanvas/engine",
+        "revision": "46233e5bcd2ab17395f242341bc3be480188ec23",
+        "path": "examples/assets/splats/apartment.sog"
+      },
+      "modifications": "None; inventory records the existing upstream bundle unchanged.",
+      "license": {
+        "status": "conflicting-evidence",
+        "author": "Stephane Agullo",
+        "reviewed_on": "2026-10-29",
+        "automatic_fetch_enabled": false,
+        "release_publication_enabled": false,
+        "evidence": [
+          {
+            "url": "https://github.com/playcanvas/engine/blob/46233e5bcd2ab17395f242341bc3be480188ec23/examples/src/examples/gaussian-splatting/editor.example.mjs",
+            "declaration": "CC-BY-4.0",
+            "scope": "Pinned example loads apartment.sog and credits SA3D_R&D_XP47 with source scene cdcec084."
+          },
+          {
+            "url": "https://superspl.at/scene/cdcec084",
+            "declaration": "CC-BY-NC-4.0",
+            "scope": "Linked author scene currently has a different title/count and a noncommercial declaration."
+          },
+          {
+            "url": "https://dev.superspl.at/scene/3d82f1d2",
+            "declaration": "CC-BY-4.0",
+            "scope": "Secondary development-site upload has matching approximate title/count, but is not proof of the original author grant for these exact bytes."
+          }
+        ],
+        "resolution_needed": "Establish the permission and attribution applying to this pinned apartment.sog version; retain evidence of an applicable grant or use a different fixture. Do not assume a later declaration revokes any earlier valid grant."
+      },
+      "files": [
+        {
+          "path": "apartment.sog",
+          "bytes": 8379050,
+          "sha256": "961aad67c47e6ee236bd3789978745da6b2ae6afe7f1a0863e05617ef03881d5",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/apartment.sog"
+        }
+      ]
+    },
+    "junkshop-sh3-v1": {
+      "title": "JunkShop SH3 (Gaussian-Splat-Lite example)",
+      "format": "sog-v2-bundle",
+      "splat_count": 1000000,
+      "sh_degree": 3,
+      "source": {
+        "repository": "https://github.com/WilliamLiu-1997/Gaussian-Splat-Lite",
+        "revision": "3cd506ae21cfaf842501a80b1c443af2799333b0",
+        "path": "examples/JunkShop-SH3.sog"
+      },
+      "modifications": "None; inventory records the existing upstream bundle unchanged.",
+      "license": {
+        "status": "unverified",
+        "author": null,
+        "reviewed_on": "2026-10-29",
+        "automatic_fetch_enabled": false,
+        "release_publication_enabled": false,
+        "evidence": [
+          {
+            "url": "https://github.com/WilliamLiu-1997/Gaussian-Splat-Lite/blob/3cd506ae21cfaf842501a80b1c443af2799333b0/examples/viewer/viewer.js",
+            "declaration": "NOASSERTION",
+            "scope": "Viewer references this example bundle but does not identify its original author or asset-specific permission."
+          },
+          {
+            "url": "https://github.com/WilliamLiu-1997/Gaussian-Splat-Lite/blob/3cd506ae21cfaf842501a80b1c443af2799333b0/README.md",
+            "declaration": "Apache-2.0 (renderer code)",
+            "scope": "Repository describes its software license; this review did not establish the separate example scene grant."
+          }
+        ],
+        "resolution_needed": "Identify the scene creator, original source and license covering this exact SOG derivative. Do not assign the Blender scene license based only on a matching name."
+      },
+      "files": [
+        {
+          "path": "JunkShop-SH3.sog",
+          "bytes": 16389277,
+          "sha256": "1d71427c8e384c20e370aa5a30a2da77297f6be6f809b285e26f5f83f3e2b655",
+          "url": "https://raw.githubusercontent.com/WilliamLiu-1997/Gaussian-Splat-Lite/3cd506ae21cfaf842501a80b1c443af2799333b0/examples/JunkShop-SH3.sog"
+        }
+      ]
+    },
+    "playbot-lod-v1": {
+      "title": "Playbot LOD (PlayCanvas example)",
+      "format": "sog-v2-hierarchy",
+      "lod_levels": 7,
+      "finest_level_splats": 500000,
+      "chunk_splat_counts_in_manifest_order": [
+        500000,
+        125000,
+        250000,
+        31000,
+        3000,
+        8406,
+        1873
+      ],
+      "range_count": 14,
+      "source": {
+        "repository": "https://github.com/playcanvas/engine",
+        "revision": "46233e5bcd2ab17395f242341bc3be480188ec23",
+        "path": "examples/assets/splats/playbot/"
+      },
+      "modifications": "None; inventory preserves all relative hierarchy paths and bytes. No archive published.",
+      "license": {
+        "status": "conflicting-evidence",
+        "author": "Stephane Agullo",
+        "reviewed_on": "2026-10-29",
+        "automatic_fetch_enabled": false,
+        "release_publication_enabled": false,
+        "evidence": [
+          {
+            "url": "https://github.com/playcanvas/engine/blob/46233e5bcd2ab17395f242341bc3be480188ec23/examples/src/examples/gaussian-splatting/lod-instances.example.mjs",
+            "declaration": "CC-BY-4.0",
+            "scope": "Pinned example credits the author and links scene ee6d8bc4."
+          },
+          {
+            "url": "https://superspl.at/scene/ee6d8bc4",
+            "declaration": "CC-BY-NC-4.0",
+            "scope": "Linked author page currently declares noncommercial attribution terms."
+          }
+        ],
+        "resolution_needed": "Resolve which grant covers the pinned hierarchy and intended benchmark use before enabling fetch or release publication. Preserve both declarations; do not silently substitute the renderer code license or treat the conflict as a revocation finding."
+      },
+      "files": [
+        {
+          "path": "0_0/means_l.webp",
+          "bytes": 1503808,
+          "sha256": "cfb49f90bc183bc9407e6232c8ac696eb453ff5c0bbdf8280334ee402642ebf0",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/0_0/means_l.webp"
+        },
+        {
+          "path": "0_0/means_u.webp",
+          "bytes": 401730,
+          "sha256": "ad6dccca84465467ab386f7bf830597250b54e13e676e2babc03854724beebfa",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/0_0/means_u.webp"
+        },
+        {
+          "path": "0_0/meta.json",
+          "bytes": 15279,
+          "sha256": "636df1da2b81ddaf36a2bce7906fce826f6bd38e60d6d7f81dafbb81d8d772ac",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/0_0/meta.json"
+        },
+        {
+          "path": "0_0/quats.webp",
+          "bytes": 1631098,
+          "sha256": "2e4110ecdde9af6811d3c21e12171c2d22a7c80b0752972b886564e87f33a3cc",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/0_0/quats.webp"
+        },
+        {
+          "path": "0_0/scales.webp",
+          "bytes": 1367472,
+          "sha256": "ac0ec2196d76b558e8e46a7449b512578d5d7fa89b92e963b0e371a58704c759",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/0_0/scales.webp"
+        },
+        {
+          "path": "0_0/sh0.webp",
+          "bytes": 1495862,
+          "sha256": "bc1db49ffa38e5ea18019d03f8f0f12f07574abe65d4d7231cf69e5c886f558c",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/0_0/sh0.webp"
+        },
+        {
+          "path": "0_0/shN_centroids.webp",
+          "bytes": 1091088,
+          "sha256": "7634fb4be004369460e86d1ba5b06eb9a96a694ee0d7484b019f18e7ce70f6f9",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/0_0/shN_centroids.webp"
+        },
+        {
+          "path": "0_0/shN_labels.webp",
+          "bytes": 993526,
+          "sha256": "e688c565c97c2310aa447d6f16e059c26608a8e09f9d5849d050d2086f8e5ce8",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/0_0/shN_labels.webp"
+        },
+        {
+          "path": "1_0/means_l.webp",
+          "bytes": 752034,
+          "sha256": "4fc3cca51295192c8c27fd16b98a180306f205bf151c583dec78184e86b51809",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/1_0/means_l.webp"
+        },
+        {
+          "path": "1_0/means_u.webp",
+          "bytes": 230440,
+          "sha256": "ad3135f87fe9a79b08f11c023ba20c2fde960cf05354647a212db28b5abc3473",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/1_0/means_u.webp"
+        },
+        {
+          "path": "1_0/meta.json",
+          "bytes": 15328,
+          "sha256": "2f26033d684309a78fd31000e8b104ba3c767c643ad03044901a9cd6913593b0",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/1_0/meta.json"
+        },
+        {
+          "path": "1_0/quats.webp",
+          "bytes": 808076,
+          "sha256": "4c977d0aaf18d97a326f0ceb3690d08d4be302bf7819c2457e52ebe36911bfc1",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/1_0/quats.webp"
+        },
+        {
+          "path": "1_0/scales.webp",
+          "bytes": 681356,
+          "sha256": "1eb62c51ef0447b67a8826d29821564b4f114ae6b7153ff67b8347a43000c010",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/1_0/scales.webp"
+        },
+        {
+          "path": "1_0/sh0.webp",
+          "bytes": 764748,
+          "sha256": "97b001e4b1564b12731d9f3c8666f6229755d8b6f379a58507da4e068be1416a",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/1_0/sh0.webp"
+        },
+        {
+          "path": "1_0/shN_centroids.webp",
+          "bytes": 1118080,
+          "sha256": "0a8818d68f9864d76897c73418b7e300ba6b90e1479684e68c6be6df7792c4dc",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/1_0/shN_centroids.webp"
+        },
+        {
+          "path": "1_0/shN_labels.webp",
+          "bytes": 496350,
+          "sha256": "cb07faa61f910fbe2bd894d9cfde006d1b01314dd75dd24ccdb6cc1b175f8a60",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/1_0/shN_labels.webp"
+        },
+        {
+          "path": "2_0/means_l.webp",
+          "bytes": 375180,
+          "sha256": "2cc5f0ea53a5eb7dabe3bd056cef5a0bb1c3b633f89d4bd3f8ebaa14f8f24485",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/2_0/means_l.webp"
+        },
+        {
+          "path": "2_0/means_u.webp",
+          "bytes": 132588,
+          "sha256": "ce9ad92fdeddb4db1c2d70a297f5cb175c785354e40ba9dc8d0ce63025b4afe7",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/2_0/means_u.webp"
+        },
+        {
+          "path": "2_0/meta.json",
+          "bytes": 15300,
+          "sha256": "7e7c4a7f1e86bc4bd32d2449b7aa919de8928ee5800d9617124200a01677829b",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/2_0/meta.json"
+        },
+        {
+          "path": "2_0/quats.webp",
+          "bytes": 408076,
+          "sha256": "b3fdaaa7c2e918c7db7043d886a0fb920724656c996203a94de416b493a53c35",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/2_0/quats.webp"
+        },
+        {
+          "path": "2_0/scales.webp",
+          "bytes": 341162,
+          "sha256": "b2de216e770f0a81d286259661dd987a6f154ece65f74dde33d03805cc35db48",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/2_0/scales.webp"
+        },
+        {
+          "path": "2_0/sh0.webp",
+          "bytes": 373814,
+          "sha256": "103c17cbed8694b93012a9698dc71f0e1587d04d2bb2eeef80963f823cb259e7",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/2_0/sh0.webp"
+        },
+        {
+          "path": "2_0/shN_centroids.webp",
+          "bytes": 1092048,
+          "sha256": "8b081ddb15a77ec725d529b932b6e7278eb28633f7556cf8a15730bdb97d3648",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/2_0/shN_centroids.webp"
+        },
+        {
+          "path": "2_0/shN_labels.webp",
+          "bytes": 248692,
+          "sha256": "940f86b08645d5675645eb392679938e024a833a6a3e32358bc8557e5c1461ac",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/2_0/shN_labels.webp"
+        },
+        {
+          "path": "3_0/means_l.webp",
+          "bytes": 93200,
+          "sha256": "d747e715a6ad30028c322c53bb2b89b2a9fcb36323df10ff5c5c938a54e4aa01",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/3_0/means_l.webp"
+        },
+        {
+          "path": "3_0/means_u.webp",
+          "bytes": 42732,
+          "sha256": "a733e3379c7cdd47fc253658e568846211f20e7ef2d98de23c22e48364be90c7",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/3_0/means_u.webp"
+        },
+        {
+          "path": "3_0/meta.json",
+          "bytes": 15327,
+          "sha256": "d60c4742bc98b00882f4035b9317048f58a88b5b2f3e9a7d142f8e7f6690646c",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/3_0/meta.json"
+        },
+        {
+          "path": "3_0/quats.webp",
+          "bytes": 101266,
+          "sha256": "1c4b25f7230d687caa2de4e0b36ef84047874383399fcd521a4c5f70b9303653",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/3_0/quats.webp"
+        },
+        {
+          "path": "3_0/scales.webp",
+          "bytes": 85092,
+          "sha256": "6b1769139b02838b5fc6185d92b119b42a2df3cc3ed8390ad3fd6f183acd63d6",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/3_0/scales.webp"
+        },
+        {
+          "path": "3_0/sh0.webp",
+          "bytes": 92230,
+          "sha256": "e244a993a16bf92b8b45e4f6caee5b8bd6d8b1b03a5fc2cbbaabdee296ada9f3",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/3_0/sh0.webp"
+        },
+        {
+          "path": "3_0/shN_centroids.webp",
+          "bytes": 294260,
+          "sha256": "985886aaccaf4a6f0959bc9762a8c2d9b9c7943a120b1bdb59e1e518b748e9f2",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/3_0/shN_centroids.webp"
+        },
+        {
+          "path": "3_0/shN_labels.webp",
+          "bytes": 54128,
+          "sha256": "d93babbad4d00d8d981ca3736703320a78fb24408716ad905ef7accf6e521b33",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/3_0/shN_labels.webp"
+        },
+        {
+          "path": "4_0/means_l.webp",
+          "bytes": 25404,
+          "sha256": "ad85cb5e02aa88843eb024746630d838395761cc885fee0c52b08e98d78d179e",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/4_0/means_l.webp"
+        },
+        {
+          "path": "4_0/means_u.webp",
+          "bytes": 13752,
+          "sha256": "84d1150b1d95ccca6d63cdd40e6f5ac27fd9b73df3eeaa3c60dcabbf59ce199c",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/4_0/means_u.webp"
+        },
+        {
+          "path": "4_0/meta.json",
+          "bytes": 15336,
+          "sha256": "72e9ba436ad30934065c41d6ec298dbd1bbdae3b8f359f740a825b30a3a0921f",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/4_0/meta.json"
+        },
+        {
+          "path": "4_0/quats.webp",
+          "bytes": 27560,
+          "sha256": "b55fedcfd3d2bc4b5071e8c6180b960fe9e64ee23249ecebb91a86286f8e8545",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/4_0/quats.webp"
+        },
+        {
+          "path": "4_0/scales.webp",
+          "bytes": 24042,
+          "sha256": "29e1acd19f1368f78dd6a40835552bf5d0ea57d49845fdf42035c58a69b568d8",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/4_0/scales.webp"
+        },
+        {
+          "path": "4_0/sh0.webp",
+          "bytes": 24938,
+          "sha256": "479a1a9f28a40f2973aa7720d49ee2f82e0b3cf8a922994af7d0610b580b631b",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/4_0/sh0.webp"
+        },
+        {
+          "path": "4_0/shN_centroids.webp",
+          "bytes": 139788,
+          "sha256": "9156b4ddc50f71e4066fb7d93055c89dd1d446ac36f7911703aa625b4959d373",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/4_0/shN_centroids.webp"
+        },
+        {
+          "path": "4_0/shN_labels.webp",
+          "bytes": 13774,
+          "sha256": "2c4878cc741187d89e7251294f1fa6a2a47e94c1fdca08f14b1bcb8b2878263c",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/4_0/shN_labels.webp"
+        },
+        {
+          "path": "5_0/means_l.webp",
+          "bytes": 9216,
+          "sha256": "49160623f4e0313bc9b6c0cf5c53aeda484821fcc46d434ab7a81f1b1a991794",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/5_0/means_l.webp"
+        },
+        {
+          "path": "5_0/means_u.webp",
+          "bytes": 5738,
+          "sha256": "ac2acd409d49a7c34bd887d46cd1d164737e8247c8d9a800a76de2c3e40340b3",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/5_0/means_u.webp"
+        },
+        {
+          "path": "5_0/meta.json",
+          "bytes": 15406,
+          "sha256": "091b87e837cba82a8a0b3b02e67dc0f2e82c9a0d62eeec619281e4ee354b2a6a",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/5_0/meta.json"
+        },
+        {
+          "path": "5_0/quats.webp",
+          "bytes": 9892,
+          "sha256": "33f27d9053ea8996614fc3c60b9031766ee12df10439a56d63720cd6fd62900b",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/5_0/quats.webp"
+        },
+        {
+          "path": "5_0/scales.webp",
+          "bytes": 8744,
+          "sha256": "6076d1bc6d20c0ddceb9e7d371350c8de943fe73e2e3d58c5fe518164a82802b",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/5_0/scales.webp"
+        },
+        {
+          "path": "5_0/sh0.webp",
+          "bytes": 8958,
+          "sha256": "f585d3cfd28d364e2df972737e34c313a1ee96251fbbb205e26809a79769d470",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/5_0/sh0.webp"
+        },
+        {
+          "path": "5_0/shN_centroids.webp",
+          "bytes": 36290,
+          "sha256": "3359654840f0cb271791bf422038a985eaf33553076ee15350be3e6f2a028dfd",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/5_0/shN_centroids.webp"
+        },
+        {
+          "path": "5_0/shN_labels.webp",
+          "bytes": 4254,
+          "sha256": "f97921486007c678977696b4183bd668433bdda62c7744e0c63fb1546425d62e",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/5_0/shN_labels.webp"
+        },
+        {
+          "path": "6_0/means_l.webp",
+          "bytes": 5816,
+          "sha256": "6e04fea933aa9a1760003081a6d5b1b3b38d2fd1f9ca19cdd6fbad223516e417",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/6_0/means_l.webp"
+        },
+        {
+          "path": "6_0/means_u.webp",
+          "bytes": 3846,
+          "sha256": "bee81dc7dbf251ffe1b34c5077ea5140ca94b003069a20f623f1da8a127a7504",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/6_0/means_u.webp"
+        },
+        {
+          "path": "6_0/meta.json",
+          "bytes": 15470,
+          "sha256": "57c21f830e335186900354eb93e0654402efa700eb4d20106de071bc65abc9de",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/6_0/meta.json"
+        },
+        {
+          "path": "6_0/quats.webp",
+          "bytes": 6236,
+          "sha256": "cf911396e01c1454867c533f2484ea0bffccbda5c7fce30f622a2057efdecbbf",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/6_0/quats.webp"
+        },
+        {
+          "path": "6_0/scales.webp",
+          "bytes": 5538,
+          "sha256": "79fa6340700f214be78675478d3c7c0aa04fe02de0933fda643f7e5276a292ce",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/6_0/scales.webp"
+        },
+        {
+          "path": "6_0/sh0.webp",
+          "bytes": 5648,
+          "sha256": "0f2bbeafc70e5eb16841688b8975243775918ce7ebbadf8c63bab406366d1fbd",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/6_0/sh0.webp"
+        },
+        {
+          "path": "6_0/shN_centroids.webp",
+          "bytes": 19114,
+          "sha256": "0067ef6fc48c4325e4dddd2551d55c64637e859e805c20117384ea54376620b9",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/6_0/shN_centroids.webp"
+        },
+        {
+          "path": "6_0/shN_labels.webp",
+          "bytes": 2470,
+          "sha256": "956b372c31d6ca6accdb9626428a4566ed06ac5a951f1d359ec3b04d5873f578",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/6_0/shN_labels.webp"
+        },
+        {
+          "path": "lod-meta.json",
+          "bytes": 1040,
+          "sha256": "165c56d9f78c53babc32b82ddd05cf5e43fe6cd3627fe193a01f0efb9a89599d",
+          "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/lod-meta.json"
+        }
+      ]
+    }
+  }
+}

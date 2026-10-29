@@ -1,5 +1,10 @@
 # Inlier Data
 
+Dataset-specific licenses, attribution and candidate provenance belong in
+[the dataset catalog](datasets/README.md). Gaussian scene candidates have pinned
+hashes and explicit permission status; they are not enabled download/release
+entries until their asset-specific terms are resolved.
+
 Large benchmark archives are GitHub Release assets, never Git blobs. After a
 download completes, publish and register it with Pooch:
 
