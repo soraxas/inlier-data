@@ -140,3 +140,9 @@ CI (`.github/workflows/ci.yml`) runs the same hooks plus
 GitHub Releases: every entry must exist with its recorded URL and SHA-256, and
 every release asset must be registered. It also runs daily, because release
 assets can change outside Git.
+
+`just dashboard` writes `site/index.html`, a static overview of every
+registered artifact. In the browser it loads the live registry, the Gaussian
+catalog and the GitHub Releases API, and flags missing assets, digest
+mismatches, newer unregistered versions and release assets missing from the
+registry. `.github/workflows/dashboard.yml` publishes it to GitHub Pages.

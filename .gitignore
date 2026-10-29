@@ -17,3 +17,4 @@ phototourism-val-images-webp-*.tar.zst
 # Virtual environments
 .venv
 gaussian-*.tar.zst
+site/

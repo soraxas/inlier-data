@@ -24,3 +24,7 @@ gaussian *args:
 
 test-gaussian:
   uv run python -m unittest discover -s tests -p 'test_gaussian.py' -v
+
+# Write site/index.html, a live overview of registered release artifacts.
+dashboard:
+  uv run --no-project python scripts/build_dashboard.py
