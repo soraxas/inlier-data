@@ -18,7 +18,7 @@
         "author": "Stephane Agullo",
         "reviewed_on": "2026-10-29",
         "automatic_fetch_enabled": false,
-        "release_publication_enabled": false,
+        "release_publication_enabled": true,
         "evidence": [
           {
             "url": "https://github.com/playcanvas/engine/blob/46233e5bcd2ab17395f242341bc3be480188ec23/examples/src/examples/gaussian-splatting/editor.example.mjs",
@@ -45,7 +45,8 @@
           "sha256": "961aad67c47e6ee236bd3789978745da6b2ae6afe7f1a0863e05617ef03881d5",
           "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/apartment.sog"
         }
-      ]
+      ],
+      "release_artifact": "gaussian-apartment-v1.tar.zst"
     },
     "junkshop-sh3-v1": {
       "title": "JunkShop SH3 (Gaussian-Splat-Lite example)",
@@ -63,7 +64,7 @@
         "author": null,
         "reviewed_on": "2026-10-29",
         "automatic_fetch_enabled": false,
-        "release_publication_enabled": false,
+        "release_publication_enabled": true,
         "evidence": [
           {
             "url": "https://github.com/WilliamLiu-1997/Gaussian-Splat-Lite/blob/3cd506ae21cfaf842501a80b1c443af2799333b0/examples/viewer/viewer.js",
@@ -85,7 +86,8 @@
           "sha256": "1d71427c8e384c20e370aa5a30a2da77297f6be6f809b285e26f5f83f3e2b655",
           "url": "https://raw.githubusercontent.com/WilliamLiu-1997/Gaussian-Splat-Lite/3cd506ae21cfaf842501a80b1c443af2799333b0/examples/JunkShop-SH3.sog"
         }
-      ]
+      ],
+      "release_artifact": "gaussian-junkshop-sh3-v1.tar.zst"
     },
     "playbot-lod-v1": {
       "title": "Playbot LOD (PlayCanvas example)",
@@ -107,13 +109,13 @@
         "revision": "46233e5bcd2ab17395f242341bc3be480188ec23",
         "path": "examples/assets/splats/playbot/"
       },
-      "modifications": "None; inventory preserves all relative hierarchy paths and bytes. No archive published.",
+      "modifications": "None; inventory preserves all relative hierarchy paths and bytes.",
       "license": {
         "status": "conflicting-evidence",
         "author": "Stephane Agullo",
         "reviewed_on": "2026-10-29",
         "automatic_fetch_enabled": false,
-        "release_publication_enabled": false,
+        "release_publication_enabled": true,
         "evidence": [
           {
             "url": "https://github.com/playcanvas/engine/blob/46233e5bcd2ab17395f242341bc3be480188ec23/examples/src/examples/gaussian-splatting/lod-instances.example.mjs",
@@ -471,7 +473,8 @@
           "sha256": "165c56d9f78c53babc32b82ddd05cf5e43fe6cd3627fe193a01f0efb9a89599d",
           "url": "https://raw.githubusercontent.com/playcanvas/engine/46233e5bcd2ab17395f242341bc3be480188ec23/examples/assets/splats/playbot/lod-meta.json"
         }
-      ]
+      ],
+      "release_artifact": "gaussian-playbot-lod-v1.tar.zst"
     }
   }
 }

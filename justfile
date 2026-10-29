@@ -32,3 +32,6 @@ gaussian *args:
 
 test-gaussian:
   uv run python -m unittest discover -s tests -p 'test_gaussian.py' -v
+
+package-gaussian dataset:
+  uv run python scripts/package_gaussian_splats.py "{{dataset}}"

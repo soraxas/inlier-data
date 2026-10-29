@@ -4,6 +4,21 @@
     "sha256": "dc73de2aea338a042664df7128dbde7d37de303b26f5e72b67cc8d77306e7655",
     "url": "https://github.com/soraxas/inlier-data/releases/download/epos-pnp-ransac-val-v1/epos-pnp-ransac-val-v1.tar.zst"
   },
+  "gaussian-apartment-v1.tar.zst": {
+    "release": "gaussian-apartment-v1",
+    "sha256": "bdda99bd312eaabf07b0581af524e206aefccf5125536c1a78a0ac834a41722b",
+    "url": "https://github.com/soraxas/inlier-data/releases/download/gaussian-apartment-v1/gaussian-apartment-v1.tar.zst"
+  },
+  "gaussian-junkshop-sh3-v1.tar.zst": {
+    "release": "gaussian-junkshop-sh3-v1",
+    "sha256": "b139ec51394837e98621aa7c42f564005acf0182db002188f2776a783f2f8cf8",
+    "url": "https://github.com/soraxas/inlier-data/releases/download/gaussian-junkshop-sh3-v1/gaussian-junkshop-sh3-v1.tar.zst"
+  },
+  "gaussian-playbot-lod-v1.tar.zst": {
+    "release": "gaussian-playbot-lod-v1",
+    "sha256": "46de0410f1c48ae3aa09ad2943ead344a58839af5c9705a9e7e04de0fbfb174b",
+    "url": "https://github.com/soraxas/inlier-data/releases/download/gaussian-playbot-lod-v1/gaussian-playbot-lod-v1.tar.zst"
+  },
   "homography-ransac-val-v1.tar.zst": {
     "release": "homography-ransac-val-v1",
     "sha256": "9ac385d6b814d112167c3b4399e757b03cd3e9aaed4606eae3856c67d9f5bb17",

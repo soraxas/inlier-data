@@ -12,11 +12,11 @@ revisions, original-byte SHA-256 hashes, sizes and license evidence for three
 candidate fixtures. It includes all 57 referenced files in the Playbot hierarchy,
 not only its root manifest. It contains metadata only, with no model binaries.
 
-| Candidate | Attribution | Evidence status | Automatic fetch / release |
+| Candidate | Attribution | Evidence status | Release mirror |
 | --- | --- | --- | --- |
-| Apartment | Stephane Agullo | Conflicting/insufficient version-specific evidence | Disabled |
-| JunkShop SH3 | Original creator not yet established | Asset-specific permission unverified | Disabled |
-| Playbot LOD | Stephane Agullo | Conflicting declarations | Disabled |
+| Apartment | Stephane Agullo | Conflicting/insufficient version-specific evidence | `gaussian-apartment-v1` |
+| JunkShop SH3 | Original creator not yet established | Asset-specific permission unverified | `gaussian-junkshop-sh3-v1` |
+| Playbot LOD | Stephane Agullo | Conflicting declarations | `gaussian-playbot-lod-v1` |
 
 The pinned PlayCanvas examples credit Apartment and Playbot as CC BY 4.0, but
 the linked author scene pages currently declare CC BY-NC 4.0. Apartment's linked
@@ -42,9 +42,12 @@ entry. Primary permission references:
 
 ## Promotion to benchmark inputs
 
-Explicit offline fixture preparation is available now; network acquisition and
-release publication remain separate from local integrity verification. Preparation
-does not establish permission for a particular use or redistribution.
+Each fixture's exact upstream bytes are mirrored as a GitHub Release asset so it
+survives upstream moves. The archive extracts to a valid `--source` root and
+carries a `LICENSE.md` linking the upstream source and license declarations; the
+release notes repeat those links. Rebuild one with
+`just package-gaussian <dataset-id>`; the bytes are reproducible. Mirroring does
+not resolve the license evidence above.
 
 1. Resolve the dataset's applicable license and exact-version attribution. Store
    its license identifier, full text or authoritative link, evidence, and any
