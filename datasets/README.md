@@ -79,7 +79,7 @@ just gaussian prepare apartment-v1 --source /path/to/apartment.sog
 just gaussian prepare junkshop-sh3-v1 --source /path/to/JunkShop-SH3.sog
 just gaussian prepare playbot-lod-v1 --source /path/to/playbot
 just gaussian verify playbot-lod-v1
-just test-gaussian
+just test
 ```
 
 Without Just, use `uv run python -m inlier_data.gaussian` with the same arguments.

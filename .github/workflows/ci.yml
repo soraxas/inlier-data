@@ -23,6 +23,26 @@ jobs:
         with:
           extra-args: --all-files
 
+  # pyproject.toml promises Python >= 3.8; install the built wheel on the oldest
+  # and newest supported versions and run the tests against it.
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.8", "3.13"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+      - run: uv build --wheel --out-dir dist
+      # Run outside the checkout so imports resolve to the wheel, not ./inlier_data.
+      - name: Import the installed wheel and run tests
+        working-directory: ${{ runner.temp }}
+        run: >-
+          uv run --isolated --no-project --python ${{ matrix.python }}
+          --with "$GITHUB_WORKSPACE"/dist/*.whl
+          python -m unittest discover -s "$GITHUB_WORKSPACE/tests" -v
+
   release-artifacts:
     runs-on: ubuntu-latest
     steps:
@@ -32,3 +52,10 @@ jobs:
         run: uv run --no-project python scripts/check_release_assets.py
         env:
           GITHUB_TOKEN: ${{ github.token }}
+      # Mirrors can be rebuilt from upstream alone, so this also catches
+      # upstream files that moved, vanished or changed.
+      - name: Rebuild Gaussian mirrors and match registered SHA-256
+        run: |
+          for name in gaussian-apartment-v1 gaussian-junkshop-sh3-v1 gaussian-playbot-lod-v1; do
+            uv run --no-project python scripts/package_release.py "$name" --verify
+          done

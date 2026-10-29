@@ -22,8 +22,8 @@ check-releases:
 gaussian *args:
   uv run python -m inlier_data.gaussian "$@"
 
-test-gaussian:
-  uv run python -m unittest discover -s tests -p 'test_gaussian.py' -v
+test:
+  uv run python -m unittest discover -s tests -v
 
 # Write site/index.html, a live overview of registered release artifacts.
 dashboard:

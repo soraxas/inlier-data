@@ -66,12 +66,16 @@ existing asset with different bytes, and records the URL, tag and SHA-256 in
 ```bash
 prek install       # once per clone; hooks then run on every commit
 just check         # all hooks on the whole tree
+just test          # unit tests
 just check-releases  # compare the registry with live GitHub Releases
 just dashboard     # build site/index.html locally
 ```
 
 Hooks lint and format with ruff, block dataset archives from Git, verify
 `REPO_REGISTRY` against `testdata/` hashes, validate the release registry,
-check `uv.lock`, run the Gaussian fixture tests, and build and import a clean
-wheel. CI runs the same hooks plus the live release check on every push, pull
-request and daily, and publishes the dashboard to GitHub Pages.
+check `uv.lock`, run the unit tests, and build and import a clean wheel. CI
+runs the same hooks; installs the wheel on Python 3.8 and 3.13 and runs the
+tests against it; compares the registry with live GitHub Releases; and rebuilds
+the Gaussian mirrors from upstream, requiring their registered SHA-256. It runs
+on every push, pull request and daily, and publishes the dashboard to GitHub
+Pages. `just package <name> --verify` runs the same rebuild check locally.

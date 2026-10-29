@@ -53,9 +53,9 @@ repos:
         files: ^(pyproject\.toml|uv\.lock|inlier_data/|scripts/check_wheel\.py$)
         pass_filenames: false
 
-      - id: test-gaussian-fixtures
-        name: test offline Gaussian fixture preparation
+      - id: unit-tests
+        name: run unit tests
         language: system
-        entry: uv run --quiet python -m unittest discover -s tests -p test_gaussian.py
-        files: ^(inlier_data/gaussian|tests/test_gaussian\.py$|pyproject\.toml$|uv\.lock$)
+        entry: uv run --quiet python -m unittest discover -s tests
+        files: ^(inlier_data/|tests/|scripts/package_release\.py$|pyproject\.toml$|uv\.lock$)
         pass_filenames: false

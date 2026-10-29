@@ -23,6 +23,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
+REGISTRY = ROOT / "inlier_data" / "release_artifacts.json"
 GAUSSIAN_CATALOG = ROOT / "inlier_data" / "gaussian_splats.json"
 PHOTOTOURISM_SCENES = ("sacre_coeur", "st_peters_square")
 
@@ -265,9 +266,29 @@ def main() -> None:
         "source", nargs="?", type=Path, help="Local source (default per package)"
     )
     parser.add_argument("--output", type=Path, help="Default: <name>.tar.zst")
+    parser.add_argument(
+        "--verify",
+        action="store_true",
+        help="Rebuild into a temporary file and require the registered SHA-256",
+    )
     args = parser.parse_args()
     if shutil.which("zstd") is None:
         raise SystemExit("Packaging requires zstd on PATH")
+    if args.verify:
+        registered = json.loads(REGISTRY.read_text()).get(f"{args.name}.tar.zst")
+        if registered is None:
+            raise SystemExit(f"{args.name}.tar.zst is not in {REGISTRY.name}")
+        with tempfile.TemporaryDirectory() as temp:
+            output = Path(temp) / f"{args.name}.tar.zst"
+            build(args.name, args.source, output)
+            actual = sha256(output)
+        if actual != registered["sha256"]:
+            raise SystemExit(
+                f"Rebuilt {args.name} has SHA-256 {actual}, registered "
+                f"{registered['sha256']}"
+            )
+        print(f"verified: rebuild matches registered {args.name}")
+        return
     output = (args.output or Path(f"{args.name}.tar.zst")).resolve()
     if output.suffixes[-2:] != [".tar", ".zst"]:
         raise SystemExit("Output must have a .tar.zst suffix")
