@@ -55,7 +55,9 @@ def main() -> None:
         raise SystemExit("Output must have a .tar.zst suffix")
 
     output.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="epos-pnp-ransac-", dir=output.parent) as temp:
+    with tempfile.TemporaryDirectory(
+        prefix="epos-pnp-ransac-", dir=output.parent
+    ) as temp:
         temp_path = Path(temp)
         staging = temp_path / ARCHIVE_ROOT / SOURCE_DIR
         staging.mkdir(parents=True)
@@ -64,7 +66,9 @@ def main() -> None:
 
         tar_path = temp_path / "fixture.tar"
         compressed_path = temp_path / output.name
-        subprocess.run(["tar", "-C", temp_path, "-cf", tar_path, ARCHIVE_ROOT], check=True)
+        subprocess.run(
+            ["tar", "-C", temp_path, "-cf", tar_path, ARCHIVE_ROOT], check=True
+        )
         subprocess.run(
             ["zstd", "-q", "-19", "-T0", "-f", tar_path, "-o", compressed_path],
             check=True,

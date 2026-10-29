@@ -13,3 +13,9 @@ include = ["inlier_data"]
 
 [tool.setuptools.package-data]
 inlier_data = ["release_artifacts.json"]
+
+[tool.ruff.lint]
+# Pin the rule set here so local global ruff configs do not change results.
+select = ["E", "F", "W", "I", "B", "UP"]
+# Line length is the formatter's job; registry hash lines cannot wrap.
+ignore = ["E501"]

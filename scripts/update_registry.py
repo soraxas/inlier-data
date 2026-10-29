@@ -4,22 +4,23 @@ import ast
 import re
 import subprocess
 from pathlib import Path
-from typing import Dict
-
 
 ROOT = Path(__file__).resolve().parent.parent
 REGISTRY_FILE = ROOT / "inlier_data" / "__init__.py"
 TESTDATA_DIR = ROOT / "testdata"
 
 
-def _load_registry(source: str) -> Dict[str, str]:
+def _load_registry(source: str) -> dict[str, str]:
     tree = ast.parse(source)
     registry_node = next(
         (
             node.value
             for node in tree.body
             if isinstance(node, ast.Assign)
-            and any(isinstance(target, ast.Name) and target.id == "REPO_REGISTRY" for target in node.targets)
+            and any(
+                isinstance(target, ast.Name) and target.id == "REPO_REGISTRY"
+                for target in node.targets
+            )
         ),
         None,
     )
@@ -30,7 +31,7 @@ def _load_registry(source: str) -> Dict[str, str]:
     return ast.literal_eval(registry_node)
 
 
-def _render_registry_block(registry: Dict[str, str], indent: str) -> str:
+def _render_registry_block(registry: dict[str, str], indent: str) -> str:
     entry_indent = indent + "    "
     lines = [
         f'{entry_indent}"{name}": "{sha}",' for name, sha in sorted(registry.items())
@@ -38,7 +39,7 @@ def _render_registry_block(registry: Dict[str, str], indent: str) -> str:
     return "\n".join([f"{indent}REPO_REGISTRY = {{"] + lines + [f"{indent}}}"])
 
 
-def _replace_registry_block(source: str, registry: Dict[str, str]) -> str:
+def _replace_registry_block(source: str, registry: dict[str, str]) -> str:
     pattern = re.compile(r"(?ms)^(?P<indent>\s*)REPO_REGISTRY\s*=\s*\{.*?^\s*\}")
     match = pattern.search(source)
     if not match:

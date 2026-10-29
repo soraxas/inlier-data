@@ -53,7 +53,9 @@ def extract_required_files(source: Path, destination: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("source", type=Path, help="RANSAC tutorial homography.tar.gz archive")
+    parser.add_argument(
+        "source", type=Path, help="RANSAC tutorial homography.tar.gz archive"
+    )
     parser.add_argument(
         "--output", type=Path, default=Path("homography-ransac-val-v1.tar.zst")
     )
@@ -70,7 +72,9 @@ def main() -> None:
         raise SystemExit("Output must have a .tar.zst suffix")
 
     output.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="homography-ransac-", dir=output.parent) as temp:
+    with tempfile.TemporaryDirectory(
+        prefix="homography-ransac-", dir=output.parent
+    ) as temp:
         temp_path = Path(temp)
         staging = temp_path / ARCHIVE_ROOT
         extract_required_files(source, staging)

@@ -1,0 +1,54 @@
+# Managed by prek (https://github.com/j178/prek): `prek install` once, then
+# hooks run on every commit. `prek run --all-files` checks the whole tree.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        args: [--maxkb=1024]
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
+      - id: check-merge-conflict
+      # testdata/ bytes are pinned by SHA-256 in REPO_REGISTRY; never rewrite them.
+      - id: end-of-file-fixer
+        exclude: ^testdata/
+      - id: trailing-whitespace
+        exclude: ^testdata/
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.3
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      # Datasets and generated archives belong in GitHub Releases, not Git.
+      - id: no-dataset-blobs
+        name: reject dataset archives and binaries
+        language: fail
+        entry: Publish datasets as release assets (see AGENTS.md), do not commit
+        files: \.(tar|tar\.gz|tar\.zst|zst|zip|h5|hdf5|aria2|ppm|npy|npz)$
+
+      - id: check-registry
+        name: check Pooch registries match testdata and releases
+        language: system
+        entry: uv run --quiet --no-project python scripts/check_registry.py
+        files: ^(testdata/|inlier_data/|scripts/check_registry\.py$)
+        pass_filenames: false
+
+      - id: uv-lock
+        name: check uv.lock is up to date
+        language: system
+        entry: uv lock --check
+        files: ^(pyproject\.toml|uv\.lock)$
+        pass_filenames: false
+
+      - id: check-wheel
+        name: build wheel and check installed import
+        language: system
+        entry: uv run --quiet --no-project python scripts/check_wheel.py
+        files: ^(pyproject\.toml|uv\.lock|inlier_data/|scripts/check_wheel\.py$)
+        pass_filenames: false

@@ -18,3 +18,9 @@ package-homography source="homography.tar.gz" output="homography-ransac-val-v1.t
 
 package-epos-pnp source="RANSAC-Tutorial-Data-PnP" output="epos-pnp-ransac-val-v1.tar.zst":
   uv run scripts/package_epos_pnp_ransac.py "{{source}}" --output "{{output}}"
+
+check:
+  prek run --all-files
+
+check-releases:
+  uv run --no-project python scripts/check_release_assets.py

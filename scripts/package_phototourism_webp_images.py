@@ -25,7 +25,9 @@ def convert(source: Path, destination: Path, quality: int) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("source", type=Path, help="Extracted archive root or its val directory")
+    parser.add_argument(
+        "source", type=Path, help="Extracted archive root or its val directory"
+    )
     parser.add_argument(
         "--output",
         type=Path,
@@ -49,15 +51,15 @@ def main() -> None:
         raise SystemExit("Output must have a .tar.zst suffix")
 
     images = sorted(
-        image
-        for scene in SCENES
-        for image in (source / scene / "images").glob("*.jpg")
+        image for scene in SCENES for image in (source / scene / "images").glob("*.jpg")
     )
     if not images:
         raise SystemExit(f"No JPEG images found below {source}")
 
     output.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="phototourism-webp-", dir=output.parent) as temp:
+    with tempfile.TemporaryDirectory(
+        prefix="phototourism-webp-", dir=output.parent
+    ) as temp:
         staging = Path(temp) / ARCHIVE_ROOT
         destinations = [
             staging / image.relative_to(source).with_suffix(".webp") for image in images

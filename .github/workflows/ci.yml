@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # Release assets can change outside Git (uploads, deletions), so re-check daily.
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prek:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+      # Runs every hook on the whole tree, including the wheel build check.
+      - uses: j178/prek-action@v2
+        with:
+          extra-args: --all-files
+
+  release-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+      - name: Check release_artifacts.json matches GitHub Releases
+        run: uv run --no-project python scripts/check_release_assets.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

@@ -53,7 +53,9 @@ def main() -> None:
         raise SystemExit("Missing required inputs:\n" + "\n".join(map(str, missing)))
 
     output.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="phototourism-ransac-", dir=output.parent) as temp:
+    with tempfile.TemporaryDirectory(
+        prefix="phototourism-ransac-", dir=output.parent
+    ) as temp:
         staging = Path(temp) / ARCHIVE_ROOT
         for source_path in expected:
             relative = source_path.relative_to(source)
@@ -63,9 +65,7 @@ def main() -> None:
 
         tar_path = Path(temp) / "fixture.tar"
         compressed_path = Path(temp) / output.name
-        subprocess.run(
-            ["tar", "-C", temp, "-cf", tar_path, ARCHIVE_ROOT], check=True
-        )
+        subprocess.run(["tar", "-C", temp, "-cf", tar_path, ARCHIVE_ROOT], check=True)
         subprocess.run(
             ["zstd", "-q", "-19", "-T0", "-f", tar_path, "-o", compressed_path],
             check=True,

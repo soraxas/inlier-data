@@ -110,3 +110,18 @@ unzip -l /tmp/inlier-data-wheel/*.whl
 
 The wheel must include both `inlier_data/__init__.py` and
 `inlier_data/release_artifacts.json`.
+
+## Commit Checks
+
+Hooks are managed by [prek](https://github.com/j178/prek). Run `prek install`
+once per clone; `just check` runs every hook on the whole tree. On commit they
+lint and format Python with ruff, reject dataset archives, verify
+`REPO_REGISTRY` against `testdata/` hashes and the shape of
+`release_artifacts.json`, check `uv.lock`, and, when packaging inputs change,
+build a clean wheel and import it from an isolated install.
+
+CI (`.github/workflows/ci.yml`) runs the same hooks plus
+`just check-releases`, which compares `release_artifacts.json` with the live
+GitHub Releases: every entry must exist with its recorded URL and SHA-256, and
+every release asset must be registered. It also runs daily, because release
+assets can change outside Git.

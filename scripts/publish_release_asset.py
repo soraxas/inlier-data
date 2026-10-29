@@ -44,13 +44,27 @@ def main() -> None:
             f"{artifact.name} exceeds the strict 2 GiB GitHub Release asset limit"
         )
 
-    exists = subprocess.run(
-        ["gh", "release", "view", args.tag], text=True, capture_output=True
-    ).returncode == 0
+    exists = (
+        subprocess.run(
+            ["gh", "release", "view", args.tag], text=True, capture_output=True
+        ).returncode
+        == 0
+    )
     if not exists:
-        command("gh", "release", "create", args.tag, "--title", args.tag, "--notes", args.notes)
+        command(
+            "gh",
+            "release",
+            "create",
+            args.tag,
+            "--title",
+            args.tag,
+            "--notes",
+            args.notes,
+        )
 
-    repository = command("gh", "repo", "view", "--json", "nameWithOwner", "--jq", ".nameWithOwner").strip()
+    repository = command(
+        "gh", "repo", "view", "--json", "nameWithOwner", "--jq", ".nameWithOwner"
+    ).strip()
 
     def release_assets() -> list[dict[str, str]]:
         release = json.loads(
@@ -69,7 +83,9 @@ def main() -> None:
             )
     else:
         command("gh", "release", "upload", args.tag, str(artifact))
-        asset = next((item for item in release_assets() if item["name"] == artifact.name), None)
+        asset = next(
+            (item for item in release_assets() if item["name"] == artifact.name), None
+        )
         if asset is None:
             raise SystemExit(f"Release upload did not produce {artifact.name}")
 
