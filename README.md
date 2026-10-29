@@ -1,77 +1,77 @@
 # Inlier Data
 
-Dataset-specific licenses, attribution and candidate provenance belong in
-[the dataset catalog](datasets/README.md). Gaussian scene candidates have pinned
-hashes and explicit permission status; they are not enabled download/release
-entries until their asset-specific terms are resolved.
-Offline fixture preparation from existing local files is available with
-`just gaussian prepare <dataset-id> --source <file-or-directory>`; see
-[fixture preparation](datasets/README.md#prepare-the-local-fixtures).
+Benchmark and test fixtures for `inlier` and `inlier-benchmarks`, served
+through [Pooch](https://www.fatiando.org/pooch/). Small files live in
+`testdata/`; large archives are GitHub Release assets, never Git blobs.
 
-Large benchmark archives are GitHub Release assets, never Git blobs. After a
-download completes, publish and register it with Pooch:
+**[Release dashboard](https://cs.tinyiu.com/inlier-data/)** shows every
+registered artifact, its latest release, size, downloads and digest status.
 
-```bash
-just publish-release RANSAC-Tutorial-Data-ValOnly.tar phototourism-val-v1
+## Using the data
+
+```python
+from inlier_data import TEST_DATA
+
+path = TEST_DATA.fetch("homography-ransac-val-v1.tar.zst")
 ```
 
-The command rejects unfinished `.aria2` downloads and files larger than 2 GiB,
-uploads to the named release, and records the release URL and SHA256 in
-`inlier_data/release_artifacts.json`.
+`inlier_data.REGISTRY` and `inlier_data.URLS` are the complete Pooch inputs.
+Set `INLIER_DATA_DIR` to override the cache location.
 
-## PhotoTourism RANSAC fixture
+| Artifact | Contents |
+| --- | --- |
+| `phototourism-ransac-val-v1` | Cached correspondences and F/E/K/R/T ground truth for two validation scenes; no images |
+| `phototourism-val-images-webp-q85-v1` | Quality-85 WebP images for visual inspection only, not a benchmark input |
+| `homography-ransac-val-v1` | HPatchesSeq and EVD validation `matches.h5`, `match_conf.h5`, `Hgt.h5`; no images |
+| `epos-pnp-ransac-val-v1` | The complete EPOS `epos_corr_lmo` 2D–3D correspondence set |
+| `gaussian-apartment-v1`, `gaussian-junkshop-sh3-v1`, `gaussian-playbot-lod-v1` | Unmodified mirrors of upstream Gaussian splat scenes |
 
-The RANSAC benchmark consumes cached correspondences and ground truth, not the
-source images. Build its image-free fixture from the extracted validation data:
+The benchmark fixtures exclude source images on purpose: recompression or
+feature re-extraction would make results incomparable.
 
-```bash
-just package phototourism-ransac-val-v1
-just publish-release phototourism-ransac-val-v1.tar.zst phototourism-ransac-val-v1
-```
+### Gaussian splat fixtures
 
-The archive contains `matches.h5`, `match_conf.h5`, fundamental/essential
-ground truth, calibration, and relative pose for both validation scenes. It
-intentionally excludes JPEGs: image recompression or feature re-extraction
-would make benchmark results incomparable.
-
-## PhotoTourism WebP images
-
-For visual inspection only, build and publish a separate lossy WebP archive:
-
-```bash
-just package phototourism-val-images-webp-q85-v1
-just publish-release phototourism-val-images-webp-q85-v1.tar.zst phototourism-val-images-webp-q85-v1
-```
-
-This is deliberately not a benchmark input. Lossless WebP preserves JPEG
-decoded pixels but measured 41.67% larger than the original JPEG sample;
-quality-85 WebP measured 78.35% smaller.
-
-## Homography RANSAC fixture
-
-Build the image-free HPatchesSeq and EVD validation fixture directly from the
-RANSAC tutorial archive:
+Each Gaussian archive carries a `LICENSE.md` linking the upstream source and
+license declarations, and the release notes repeat them. Their license evidence
+is unresolved (see [the dataset catalog](datasets/README.md)); check it before
+use or redistribution. Prepare a verified local fixture from an extracted
+archive or upstream files:
 
 ```bash
-just package homography-ransac-val-v1 /path/to/homography.tar.gz
-just publish-release homography-ransac-val-v1.tar.zst homography-ransac-val-v1
+just gaussian prepare playbot-lod-v1 --source /path/to/gaussian-playbot-lod-v1
 ```
 
-## EPOS PnP validation fixture
+See [fixture preparation](datasets/README.md#prepare-the-local-fixtures).
 
-The EPOS 2D--3D correspondence files from the RANSAC Tutorial PnP archive are
-small enough to ship in full and do not require images. Build and publish the
-canonical archive from the extracted source tree:
+## Adding or updating data
+
+Small deterministic files: add them to `testdata/` and run `just update` to
+record their hashes in `REPO_REGISTRY`.
+
+Large archives: add an entry to `PACKAGES` in `scripts/package_release.py`,
+then build, publish and commit the registry update:
 
 ```bash
-just package epos-pnp-ransac-val-v1 /path/to/extracted/RANSAC-Tutorial-Data-PnP
-just publish-release epos-pnp-ransac-val-v1.tar.zst epos-pnp-ransac-val-v1
+just package <name> [source]
+just publish-release <name>.tar.zst <name>
 ```
 
-The archive contains the complete `epos_corr_lmo` set; benchmark code selects a
-deterministic, stratified subset for each CI scope.
+The packager writes a reproducible `<name>.tar.zst`. The publisher rejects
+unfinished `.aria2` downloads and files over 2 GiB, refuses to replace an
+existing asset with different bytes, and records the URL, tag and SHA-256 in
+`inlier_data/release_artifacts.json`. Use a new tag (`-v2`) for changed bytes.
 
-It contains only cached correspondence, confidence, and ground-truth
-homography HDF5 files. The PPM images and test split are intentionally
-excluded because estimating an `inlier` model needs no image decoding or
-feature extraction.
+## Checks
+
+```bash
+prek install       # once per clone; hooks then run on every commit
+just check         # all hooks on the whole tree
+just check-releases  # compare the registry with live GitHub Releases
+just dashboard     # build site/index.html locally
+```
+
+Hooks lint and format with ruff, block dataset archives from Git, verify
+`REPO_REGISTRY` against `testdata/` hashes, validate the release registry,
+check `uv.lock`, run the Gaussian fixture tests, and build and import a clean
+wheel. CI runs the same hooks plus the live release check on every push, pull
+request and daily, and publishes the dashboard to GitHub Pages.
