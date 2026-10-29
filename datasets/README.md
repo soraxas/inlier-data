@@ -46,7 +46,7 @@ Each fixture's exact upstream bytes are mirrored as a GitHub Release asset so it
 survives upstream moves. The archive extracts to a valid `--source` root and
 carries a `LICENSE.md` linking the upstream source and license declarations; the
 release notes repeat those links. Rebuild one with
-`just package-gaussian <dataset-id>`; the bytes are reproducible. Mirroring does
+`just package gaussian-<dataset-id>`; the bytes are reproducible. Mirroring does
 not resolve the license evidence above.
 
 1. Resolve the dataset's applicable license and exact-version attribution. Store

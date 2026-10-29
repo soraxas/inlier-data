@@ -4,20 +4,12 @@ help:
 update:
   uv run scripts/update_registry.py
 
+# Build <name>.tar.zst; see PACKAGES in scripts/package_release.py.
+package name source="":
+  uv run python scripts/package_release.py "{{name}}" {{ if source == "" { "" } else { quote(source) } }}
+
 publish-release artifact tag:
   uv run scripts/publish_release_asset.py "{{artifact}}" --tag "{{tag}}"
-
-package-phototourism source="RANSAC-Tutorial-Data-ValOnly" output="phototourism-ransac-val-v1.tar.zst":
-  uv run scripts/package_phototourism_ransac.py "{{source}}" --output "{{output}}"
-
-package-phototourism-webp source="RANSAC-Tutorial-Data-ValOnly" output="phototourism-val-images-webp-q85-v1.tar.zst":
-  uv run scripts/package_phototourism_webp_images.py "{{source}}" --output "{{output}}"
-
-package-homography source="homography.tar.gz" output="homography-ransac-val-v1.tar.zst":
-  uv run scripts/package_homography_ransac.py "{{source}}" --output "{{output}}"
-
-package-epos-pnp source="RANSAC-Tutorial-Data-PnP" output="epos-pnp-ransac-val-v1.tar.zst":
-  uv run scripts/package_epos_pnp_ransac.py "{{source}}" --output "{{output}}"
 
 check:
   prek run --all-files
@@ -32,6 +24,3 @@ gaussian *args:
 
 test-gaussian:
   uv run python -m unittest discover -s tests -p 'test_gaussian.py' -v
-
-package-gaussian dataset:
-  uv run python scripts/package_gaussian_splats.py "{{dataset}}"

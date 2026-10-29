@@ -19,12 +19,21 @@ binary assets as Git blobs.
 
 ## Large Release Assets
 
-GitHub Release assets have a strict 2 GiB limit in this repository. Build a
-deterministic archive below that limit, validate it, then publish it with:
+GitHub Release assets have a strict 2 GiB limit in this repository. Every
+archive is built by one packager, `scripts/package_release.py`: add the dataset
+as an entry in its `PACKAGES` spec (files to select from a local directory or
+`.tar.gz`, or a URL + SHA-256 inventory to mirror) rather than writing a new
+script. It writes a reproducible `<name>.tar.zst` with fixed tar metadata. Keep
+the package name equal to the release tag, then publish it with:
 
 ```bash
-just publish-release <archive.tar.zst> <immutable-release-tag>
+just package <name> [source]
+just publish-release <name>.tar.zst <name>
 ```
+
+Archives published before the unified packager (PhotoTourism, homography,
+EPOS) were built with system `tar`; rebuilding them yields the same files but
+different archive bytes, so a rebuild needs a new tag.
 
 The publisher rejects unfinished `.aria2` downloads, checks an existing
 asset's SHA-256 before reusing it, creates the release when necessary, uploads
@@ -39,7 +48,7 @@ Use a new immutable tag for changed bytes. Do not overwrite a release asset.
 Build the image-free RANSAC fixture from extracted validation data:
 
 ```bash
-just package-phototourism
+just package phototourism-ransac-val-v1
 just publish-release phototourism-ransac-val-v1.tar.zst phototourism-ransac-val-v1
 ```
 
@@ -50,7 +59,7 @@ benchmark consumers.
 Build the optional visual image archive separately:
 
 ```bash
-just package-phototourism-webp
+just package phototourism-val-images-webp-q85-v1
 just publish-release phototourism-val-images-webp-q85-v1.tar.zst phototourism-val-images-webp-q85-v1
 ```
 
@@ -65,7 +74,7 @@ Build the image-free validation fixture from the RANSAC tutorial's
 `homography.tar.gz` archive:
 
 ```bash
-just package-homography /path/to/homography.tar.gz
+just package homography-ransac-val-v1 /path/to/homography.tar.gz
 just publish-release homography-ransac-val-v1.tar.zst homography-ransac-val-v1
 ```
 
@@ -77,7 +86,7 @@ than a hand-picked subset: benchmark runners choose their deterministic sample
 from this canonical archive.
 
 ```bash
-just package-epos-pnp /path/to/extracted/RANSAC-Tutorial-Data-PnP
+just package epos-pnp-ransac-val-v1 /path/to/extracted/RANSAC-Tutorial-Data-PnP
 just publish-release epos-pnp-ransac-val-v1.tar.zst epos-pnp-ransac-val-v1
 ```
 

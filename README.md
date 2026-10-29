@@ -25,7 +25,7 @@ The RANSAC benchmark consumes cached correspondences and ground truth, not the
 source images. Build its image-free fixture from the extracted validation data:
 
 ```bash
-just package-phototourism
+just package phototourism-ransac-val-v1
 just publish-release phototourism-ransac-val-v1.tar.zst phototourism-ransac-val-v1
 ```
 
@@ -39,7 +39,7 @@ would make benchmark results incomparable.
 For visual inspection only, build and publish a separate lossy WebP archive:
 
 ```bash
-just package-phototourism-webp
+just package phototourism-val-images-webp-q85-v1
 just publish-release phototourism-val-images-webp-q85-v1.tar.zst phototourism-val-images-webp-q85-v1
 ```
 
@@ -53,7 +53,7 @@ Build the image-free HPatchesSeq and EVD validation fixture directly from the
 RANSAC tutorial archive:
 
 ```bash
-just package-homography /path/to/homography.tar.gz
+just package homography-ransac-val-v1 /path/to/homography.tar.gz
 just publish-release homography-ransac-val-v1.tar.zst homography-ransac-val-v1
 ```
 
@@ -64,7 +64,7 @@ small enough to ship in full and do not require images. Build and publish the
 canonical archive from the extracted source tree:
 
 ```bash
-just package-epos-pnp /path/to/extracted/RANSAC-Tutorial-Data-PnP
+just package epos-pnp-ransac-val-v1 /path/to/extracted/RANSAC-Tutorial-Data-PnP
 just publish-release epos-pnp-ransac-val-v1.tar.zst epos-pnp-ransac-val-v1
 ```
 
